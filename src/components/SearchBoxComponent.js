@@ -30,7 +30,7 @@ class SearchBoxComponent extends React.Component {
 			return false;
 		});
 
-		DataService.setData('listaFiltrada', lista);
+		DataService.setData('products', lista);
 
 		this.setState({searchText: texto});
 	}
@@ -49,7 +49,7 @@ class SearchBoxComponent extends React.Component {
 	};
 
 	onOrdenarPorNombre(e) {
-		DataService.getData('listaFiltrada').rSort((a, b) => {
+		DataService.getData('products').rSort((a, b) => {
 
 			if (a.name === b.name) {
 				return 0;

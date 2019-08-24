@@ -13,14 +13,49 @@ class FilterableProductTable extends React.Component {
 
 		super(props);
 
+		this.state = {
+			products: DataService.getData('listaFiltrada'),
+			inStock: DataService.getData('inStock')
+		};
+
+		let fnUpdateListaFiltrada=(valorNew)=>{
+			this.setState({
+				products:valorNew
+			});
+
+			/* actualizar*/
+			this.forceUpdate();
+		};
+
+		DataService.addListener('products', (valorNew, oldVal) => {
+			fnUpdateListaFiltrada(valorNew)
+		});
+
+
+		/* -------------------------------------- */
+
+		let fnOnUpdateInStock=(valorNew)=>{
+			this.setState({
+				inStock:valorNew
+			});
+
+			/* actualizar*/
+			this.forceUpdate();
+		};
+
+		DataService.addListener('inStock', (valorNew, oldVal) => {
+			fnOnUpdateInStock(valorNew)
+		});
+
+
 	}
 
 	render() {
 		// {"category": "Sporting Goods",  "price": "$49.99",    "stocked": true,    "name": "Football"},
 
-		let lista = this.props.products;
+		let lista = this.state.products;
 
-		if (this.props.inStock) {
+		if (this.state.inStock) {
 			lista = lista.filter(p => {
 				return p.stocked === true;
 			});

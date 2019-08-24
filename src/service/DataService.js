@@ -78,7 +78,7 @@ const DataService = new DataServiceObservable();
 
 let lista = DataJSON.data;
 DataService.addData('listaProductos', lista);
-DataService.addData('listaFiltrada', [...lista]);
+DataService.addData('products', [...lista]);
 DataService.addData('inStock', false);
 export default DataService;
 
