@@ -14,7 +14,7 @@ const FilterableProductTable = (props) => {
 	// {"category": "Sporting Goods",  "price": "$49.99",    "stocked": true,    "name": "Football"},
 
 	const listaTR = props.products.map(p => {
-return <tr>
+return <tr key={p.name}>
 	<td>{p.category}</td>
 	<td>{p.name}</td>
 	<td>{p.price}</td>
@@ -28,8 +28,10 @@ return <tr>
 		<table>
 			<thead>
 			<tr>
-				<th>col1</th>
-				<th>col2</th>
+				<th>category</th>
+				<th>name</th>
+				<th>price</th>
+				<th>stocked</th>
 			</tr>
 			</thead>
 			<tbody>

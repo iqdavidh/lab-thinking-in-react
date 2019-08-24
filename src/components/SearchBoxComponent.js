@@ -6,26 +6,28 @@ class SearchBoxComponent extends React.Component {
 	constructor(props) {
 		super(props);
 
-		this.state={
-			searchText:'',
-			inStock:false
+		this.state = {
+			searchText: '',
+			inStock: false
 		};
 
 	}
 
 	setSearchText(texto) {
 
-		let lista=DataService.getData('listaProductos').filter(p=>{
 
-			if(p.name.toString().indexOf(texto)>-1 ){
+		let lista=DataService.getData('listaProductos').filter(p => {
+
+			if (p.name.toString().indexOf(texto) > -1) {
 				return true;
 			}
 
 			return false;
 		});
 
-		this.setState({searchText:texto});
 		DataService.setData('listaFiltrada',lista);
+
+		this.setState({searchText: texto});
 	}
 
 	setInStock(valor) {
@@ -41,7 +43,7 @@ class SearchBoxComponent extends React.Component {
 				<input type="text" name="busqueda" value={this.state.searchText}
 							 onChange={(e) => this.setSearchText(e.target.value)}/>
 
-				<input type="checkbox" name="chkOnStock" checked={ this.state.inStock ? "checked" : ""}
+				<input type="checkbox" name="chkOnStock" checked={this.state.inStock ? "checked" : ""}
 							 onChange={(e) => this.setInStock(e.target.value)}/>
 				Only short products on stack
 			</div>

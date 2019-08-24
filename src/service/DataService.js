@@ -8,11 +8,32 @@ class DataServiceObservable {
 	constructor() {
 		this.data = {};
 		this.listener = {};
+
 	}
 
 
 	addData(key, value) {
 		this.data[key] = value;
+		let self=this;
+
+		if (Array.isArray(value)) {
+			/* override methodos*/
+
+			value.rKey=key;
+
+
+			value.rSort = function (fn) {
+				value.sort(fn);
+
+				self.listener[value.rKey].forEach(fn => {
+					fn(value);
+				});
+
+				console.log('hicimos un sort !!!!!');
+
+			}
+		}
+
 		this.listener[key] = [];
 	}
 
