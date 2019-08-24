@@ -7,51 +7,57 @@ import DataService from "../service/DataService";
  */
 
 
+class FilterableProductTable extends React.Component {
 
-const FilterableProductTable = (props) => {
+	constructor(props) {
 
+		super(props);
 
-	// {"category": "Sporting Goods",  "price": "$49.99",    "stocked": true,    "name": "Football"},
-
-	let lista = props.products;
-
-	if (props.inStock) {
-		lista = lista.filter(p => {
-			return p.stocked === true;
-		});
 	}
 
+	render() {
+		// {"category": "Sporting Goods",  "price": "$49.99",    "stocked": true,    "name": "Football"},
 
-	let listaTR = lista.map(p => {
+		let lista = this.props.products;
 
-		let texto = p.stocked ? "OK" : '';
-
-		return <tr key={p.name}>
-			<td>{p.category}</td>
-			<td>{p.name}</td>
-			<td>{p.price}</td>
-			<td>{texto}</td>
-		</tr>
-	});
+		if (this.props.inStock) {
+			lista = lista.filter(p => {
+				return p.stocked === true;
+			});
+		}
 
 
-	return <div>
+		let listaTR = lista.map(p => {
 
-		<table>
-			<thead>
-			<tr>
-				<th>category</th>
-				<th>name</th>
-				<th>price</th>
-				<th>stocked</th>
+			let texto = p.stocked ? "OK" : '';
+
+			return <tr key={p.name}>
+				<td>{p.category}</td>
+				<td>{p.name}</td>
+				<td>{p.price}</td>
+				<td>{texto}</td>
 			</tr>
-			</thead>
-			<tbody>
-			{listaTR}
-			</tbody>
-		</table>
-	</div>
-};
+		});
 
+
+		return <div>
+
+			<table>
+				<thead>
+				<tr>
+					<th>category</th>
+					<th>name</th>
+					<th>price</th>
+					<th>stocked</th>
+				</tr>
+				</thead>
+				<tbody>
+				{listaTR}
+				</tbody>
+			</table>
+		</div>
+	};
+
+}
 
 export default FilterableProductTable;
