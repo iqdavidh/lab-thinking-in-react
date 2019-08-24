@@ -4,7 +4,7 @@ import DataJSON from '../data';
  * Created by David on 24/08/2019.
  */
 
-class DataServiceStorage {
+class DataServiceObservable {
 	constructor() {
 		this.data = {};
 		this.listener = {};
@@ -34,7 +34,7 @@ class DataServiceStorage {
 	}
 }
 
-const DataService = new DataServiceStorage();
+const DataService = new DataServiceObservable();
 
 
 let lista = DataJSON.data;
