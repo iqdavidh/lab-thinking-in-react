@@ -1,7 +1,9 @@
 import React from 'react';
 import './App.css';
-import FilterableProductTable from "./components/FilterableProductTable";
 import DataService from "./service/DataService";
+
+import FilterableProductTable from "./components/FilterableProductTable";
+
 import SearchBoxComponent from "./components/SearchBoxComponent";
 
 
@@ -20,6 +22,7 @@ class App extends React.Component {
 			<div>
 
 				Inicio
+
 				<SearchBoxComponent/>
 
 				<FilterableProductTable />

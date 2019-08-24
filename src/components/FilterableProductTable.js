@@ -27,7 +27,7 @@ class FilterableProductTable extends React.Component {
 			this.forceUpdate();
 		};
 
-		DataService.addListener('products', (valorNew, oldVal) => {
+		DataService.addListener('listaFiltrada', (valorNew, oldVal) => {
 			fnUpdateListaFiltrada(valorNew)
 		});
 
