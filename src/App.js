@@ -1,26 +1,50 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import FilterableProductTable from "./components/FilterableProductTable";
+import DataService from "./service/DataService";
+import SearchBoxComponent from "./components/SearchBoxComponent";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+
+
+class App extends React.Component {
+
+	constructor(props) {
+		super(props);
+
+		this.state = {
+			listaProductos: DataService.getData('listaProductos'),
+			listaFiltrada: DataService.getData('listaFiltrada'),
+		};
+
+		const onChangeListaFiltrada = (newValue, oldValue) => {
+
+			this.setState({
+				listaFiltrada: newValue
+			})
+		};
+
+		DataService.addListener('listaFiltrada', onChangeListaFiltrada)
+
+	}
+
+
+	render() {
+
+		return (
+
+			<div>
+
+				Inicio
+				<SearchBoxComponent/>
+
+				<FilterableProductTable products={this.state.listaFiltrada}/>
+
+			</div>
+		)
+
+
+	}
 }
 
 export default App;
