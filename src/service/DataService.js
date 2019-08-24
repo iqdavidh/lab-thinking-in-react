@@ -47,6 +47,8 @@ class DataServiceObservable {
 
 		//volver a registrar los metodos de array
 		if (Array.isArray(value) && value.rSort=== undefined) {
+			value.rKey = key;
+
 			value.rSort = function (fn) {
 				this.sort(fn);
 
