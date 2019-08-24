@@ -5,8 +5,6 @@ import DataService from "./service/DataService";
 import SearchBoxComponent from "./components/SearchBoxComponent";
 
 
-
-
 class App extends React.Component {
 
 	constructor(props) {
@@ -15,16 +13,25 @@ class App extends React.Component {
 		this.state = {
 			listaProductos: DataService.getData('listaProductos'),
 			listaFiltrada: DataService.getData('listaFiltrada'),
+			inStock: DataService.getData('inStock')
 		};
 
-		const onChangeListaFiltrada = (newValue, oldValue) => {
+		DataService.addListener('listaFiltrada', (newValue, oldValue) => {
 
 			this.setState({
 				listaFiltrada: newValue
 			})
-		};
+		});
 
-		DataService.addListener('listaFiltrada', onChangeListaFiltrada)
+
+		DataService.addListener('inStock', (newValue, oldValue) => {
+
+			this.setState({
+				inStock:newValue
+			})
+		});
+
+
 
 	}
 
@@ -38,7 +45,7 @@ class App extends React.Component {
 				Inicio
 				<SearchBoxComponent/>
 
-				<FilterableProductTable products={this.state.listaFiltrada}/>
+				<FilterableProductTable products={this.state.listaFiltrada} inStock={this.state.inStock}/>
 
 			</div>
 		)

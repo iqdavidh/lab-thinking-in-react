@@ -13,13 +13,25 @@ const FilterableProductTable = (props) => {
 
 	// {"category": "Sporting Goods",  "price": "$49.99",    "stocked": true,    "name": "Football"},
 
-	const listaTR = props.products.map(p => {
-return <tr key={p.name}>
-	<td>{p.category}</td>
-	<td>{p.name}</td>
-	<td>{p.price}</td>
-	<td>{p.stocked}</td>
-</tr>
+	let lista = props.products;
+
+	if (props.inStock) {
+		lista = lista.filter(p => {
+			return p.stocked === true;
+		});
+	}
+
+
+	let listaTR = lista.map(p => {
+
+		let texto = p.stocked ? "OK" : '';
+
+		return <tr key={p.name}>
+			<td>{p.category}</td>
+			<td>{p.name}</td>
+			<td>{p.price}</td>
+			<td>{texto}</td>
+		</tr>
 	});
 
 

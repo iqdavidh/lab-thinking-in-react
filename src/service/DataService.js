@@ -14,16 +14,16 @@ class DataServiceObservable {
 
 	addData(key, value) {
 		this.data[key] = value;
-		let self=this;
+		let self = this;
 
 		if (Array.isArray(value)) {
 			/* override methodos*/
 
-			value.rKey=key;
+			value.rKey = key;
 
 
 			value.rSort = function (fn) {
-				value.sort(fn);
+				this.sort(fn);
 
 				self.listener[value.rKey].forEach(fn => {
 					fn(value);
@@ -43,6 +43,22 @@ class DataServiceObservable {
 
 	setData(key, value) {
 		const oldValue = this.data[key];
+		const self = this;
+
+		//volver a registrar los metodos de array
+		if (Array.isArray(value) && value.rSort=== undefined) {
+			value.rSort = function (fn) {
+				this.sort(fn);
+
+				self.listener[value.rKey].forEach(fn => {
+					fn(value);
+				});
+
+				console.log('hicimos un sort !!!!!');
+
+			}
+		}
+
 
 		this.data[key] = value;
 		this.listener[key].forEach(fn => {
@@ -61,7 +77,7 @@ const DataService = new DataServiceObservable();
 let lista = DataJSON.data;
 DataService.addData('listaProductos', lista);
 DataService.addData('listaFiltrada', [...lista]);
-
+DataService.addData('inStock', false);
 export default DataService;
 
 
